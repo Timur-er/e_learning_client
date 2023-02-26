@@ -1,14 +1,15 @@
-import React, {useState} from 'react';
-import {Card, CardActions, CardContent, CardMedia, Rating} from "@mui/material";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
-import {Link} from "react-router-dom";
-import {COURSE_PAGE} from "../../routes/consts";
-import styles from './CourseCard.module.scss'
-import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { CardActions, CardContent, Rating } from "@mui/material";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import React, { useState } from 'react';
+import { Link } from "react-router-dom";
+import { COURSE_PAGE } from "../../routes/consts";
+import styles from './CourseCard.module.scss';
+import * as Styled from './CourseCard_style.js';
 
 const CourseCard = ({course_id, title, description, rating, enrollments, price, image, is_paid, short, finished}) => {
     const [favourite, setFavourite] = useState(false);
@@ -19,9 +20,8 @@ const CourseCard = ({course_id, title, description, rating, enrollments, price, 
     }
 
     return (
-        <Card sx={{maxWidth: 600, display: 'flex'}}>
-            <CardMedia
-                sx={{minWidth: '25%'}}
+        <Styled.CourseCard>
+            <Styled.Media
                 image={imageLink}
                 title="green iguana"
             />
@@ -58,7 +58,7 @@ const CourseCard = ({course_id, title, description, rating, enrollments, price, 
                     </IconButton>
                 </CardActions>
             </Box>
-        </Card>
+        </Styled.CourseCard>
     );
 };
 
