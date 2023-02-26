@@ -1,0 +1,11 @@
+export const COURSES = '/';
+export const CERTIFICATES = '/certificates';
+export const USER_PAGE = '/user_page';
+export const CREATE_COURSE = '/createCourse';
+export const COURSE_PAGE = '/coursePage'
+export const COURSE_TEST_PAGE = '/courseTestPage';
+export const AUTH_PAGE = '/authPage';
+export const USERS = '/users';
+export const FAVOURITES = '/favourites';
+export const COURSE_STATISTIC = '/courseStatistic';
+export const DISCOUNT_CODE = '/discountCode';

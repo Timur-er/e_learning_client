@@ -1,0 +1,10 @@
+.form {
+  &__deleteIcon {
+    color: #bc9048;
+    transition: 0.3s ease all;
+    &:hover {
+      color: red;
+      cursor: pointer;
+    }
+  }
+}

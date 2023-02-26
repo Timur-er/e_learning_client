@@ -1,0 +1,28 @@
+.root {
+  display: flex;
+  margin: 10px 0;
+  padding: 10px;
+}
+
+.details{
+  display: flex;
+  flex-direction: column;
+}
+
+.description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+
+}
+
+.content {
+  flex: 1 0 auto;
+}
+
+.cover {
+  width: 200px;
+  height: 200px;
+}

@@ -1,0 +1,1 @@
+export const getCourseId = store => store.create_course.course_id;

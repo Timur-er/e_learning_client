@@ -1,0 +1,21 @@
+.image {
+  border-radius: 5px;
+  height: 100%;
+}
+
+.wrapper {
+  border-right: 1px solid rgba(188, 144, 72, 0.79);
+}
+
+.descriptionCard {
+  height: 100%;
+
+  &__title {
+    font-weight: bold;
+    background-color: rgba(188, 144, 72, 1);
+    padding: 10px 20px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    color: white;
+  }
+}

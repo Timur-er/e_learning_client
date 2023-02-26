@@ -1,0 +1,29 @@
+.auth {
+
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  justify-content: center;
+  vertical-align: center;
+  align-items: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  flex-direction: column;
+
+  &__formWrapper {
+    width: 22%;
+  }
+
+  &__buttonBlock {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  &__callToAction {
+    color: dodgerblue;
+    cursor: pointer;
+    margin-left: 5px;
+  }
+
+}
