@@ -41,7 +41,6 @@ const defaultTheme = createTheme({
                     "& .MuiOutlinedInput-root": {
                         "& > fieldset": {
                             borderColor: "#bc9049",
-                            backgroundColor: 'white'
                         },
                     },
                     "& .MuiFilledInput-root": {
