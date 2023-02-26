@@ -8,7 +8,7 @@ import {
     CREATE_COURSE, DISCOUNT_CODE, FAVOURITES,
     USERS
 } from "./consts";
-import CoursesPage from "../Pages/CoursesPage/CoursesPage";
+import CoursesPage from "../Pages/CoursesPage/CoursesPage/CoursesPage";
 import CertificatesPage from "../Pages/CertificatesPage/CertificatesPage";
 import CreateCoursePage from "../Pages/CreateCoursePage/CreateCoursePage";
 import CoursePage from "../Pages/CoursePage/CoursePage";

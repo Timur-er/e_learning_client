@@ -1,12 +1,13 @@
-import React, {useEffect, useState} from 'react';
-import CourseCard from "../../Components/CourseCard/CourseCard";
-import {FormControl, Grid, InputLabel, Select, Skeleton, TextField} from "@mui/material";
-import PageContainer from "../../Components/PageContainer/PageContainer";
-import {getAllCourses} from "../../http/courseAPI";
-import {useSelector} from "react-redux";
-import {getUserId} from "../../store/User/selectors";
-import Typography from "@mui/material/Typography";
+import { FormControl, Grid, InputLabel, Select, Skeleton, TextField } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
+import Typography from "@mui/material/Typography";
+import React, { useEffect, useState } from 'react';
+import { useSelector } from "react-redux";
+import CourseCard from "../../../Components/CourseCard/CourseCard";
+import PageContainer from "../../../Components/PageContainer/PageContainer";
+import { getAllCourses } from "../../../http/courseAPI";
+import { getUserId } from "../../../store/User/selectors";
+import * as Styled from "./CoursesPage_style";
 
 const CoursesPage = () => {
     const [courses, setCourses] = useState([]);
@@ -80,7 +81,7 @@ const CoursesPage = () => {
                     Kursy
                 </Typography>
 
-                <Grid item md={4} display='flex' justifyContent='space-between'
+                <Styled.SelectsGrid item md={4} display='flex' justifyContent='space-between'
                       style={{backgroundColor: '', borderRadius: '5px'}}>
                     <TextField color="secondary"
                                variant="standard"
@@ -105,20 +106,22 @@ const CoursesPage = () => {
                         </FormControl>
 
                     </Grid>
-                </Grid>
+                </Styled.SelectsGrid>
             </Grid>
 
-            <Grid container justifyContent='center' marginTop='70px' rowGap='50px' columnGap='100px'>
-                {loading
-                    ? (
-                        <>
-                            {renderSkeletons}
-                        </>
-                    ) : filteredCourses.length === 0 ?
-                        <Typography variant='h3' fontWeight='bold' color='#d84e4b'>THERE IS NO COURSES WITH THIS
-                            NAME</Typography> : renderCards
-                }
-            </Grid>
+            <Styled.CardsGridWrapper>
+                <Styled.CardsGrid container>
+                    {loading
+                        ? (
+                            <>
+                                {renderSkeletons}
+                            </>
+                        ) : filteredCourses.length === 0 ?
+                            <Typography variant='h3' fontWeight='bold' color='#d84e4b'>THERE IS NO COURSES WITH THIS
+                                NAME</Typography> : renderCards
+                    }
+                </Styled.CardsGrid>
+            </Styled.CardsGridWrapper>
         </PageContainer>
     );
 };
