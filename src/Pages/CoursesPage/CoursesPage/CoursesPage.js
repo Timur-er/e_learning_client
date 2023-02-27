@@ -76,22 +76,33 @@ const CoursesPage = () => {
 
     return (
         <PageContainer>
-            <Grid container justifyContent='space-between' alignItems='center'>
+            <Grid 
+                container
+                style={{
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                }}
+            >
                 <Typography variant='h3' color='#bb9049'>
                     Kursy
                 </Typography>
 
-                <Styled.SelectsGrid item md={4} display='flex' justifyContent='space-between'
-                      style={{backgroundColor: '', borderRadius: '5px'}}>
+                <Styled.TopInputsGrid item>
                     <TextField color="secondary"
                                variant="standard"
                                label='find by name'
                                onChange={(e) => handleFilter(e)}
+                               style={{ minWidth: "150px"}}
                     />
 
-                    <Grid item md={6}>
-                        <FormControl fullWidth>
-                            <InputLabel id="demo-simple-select-label">Sort by</InputLabel>
+                    <Styled.SelectsWrapper>
+                        <FormControl fullWidth style={{ minWidth: "150px" }}>
+                            <InputLabel
+                                id="demo-simple-select-label"
+                                style={{ width: "150px" }}
+                            >
+                                Sort by
+                            </InputLabel>
                             <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
@@ -104,9 +115,8 @@ const CoursesPage = () => {
                                 <MenuItem value='price_desc'>Price desc</MenuItem>
                             </Select>
                         </FormControl>
-
-                    </Grid>
-                </Styled.SelectsGrid>
+                    </Styled.SelectsWrapper>
+                </Styled.TopInputsGrid>
             </Grid>
 
             <Styled.CardsGridWrapper>

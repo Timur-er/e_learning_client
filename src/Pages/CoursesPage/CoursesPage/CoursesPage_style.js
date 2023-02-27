@@ -23,17 +23,36 @@ export const CardsGridWrapper = styled("div")(() => ({
   justifyContent: "center",
 }))
 
-export const SelectsGrid = styled("div")(({ theme: { breakpoints } }) => ({
+export const TopInputsGrid = styled("div")(({ theme: { breakpoints } }) => ({
   display: "flex",
+  justifyContent: 'space-between',
   borderRadius: "5px",
-  maxWidth: "530px",
   gap: "20px",
+  [breakpoints.only('xs')]: {
+    flexDirection: "column",
+    minWidth: "100%"
+  },
   [breakpoints.up("xs")]: {
     padding: 0,
     marginTop: "1rem",
-    flexDirection: "column",
   },
   [breakpoints.up("md")]: {
     flexDirection: "row",
+    gap: "1rem",
+  },
+}));
+
+export const SelectsWrapper = styled("div")(({ theme: { breakpoints } }) => ({
+  display: "flex",
+  maxWidth: "100%",
+  minWidth: "unset",
+  gap: "20px",
+  [breakpoints.only('xs')]: {
+    minWidth: "100%",
+  },
+  [breakpoints.up("xs")]: {
+
+  },
+  [breakpoints.up("md")]: {
   },
 }));
