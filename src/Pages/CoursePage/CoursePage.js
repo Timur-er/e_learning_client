@@ -54,7 +54,7 @@ const CoursePage = () => {
         return (
             <Grid item key={index}>
                 <Link to={`${COURSE_PAGE}/${id}`}>
-                    <img src={process.env.REACT_APP_API_URL + '/' + image} alt="" style={{maxWidth: '100%'}}/>
+                    <img src={image} alt="" style={{maxWidth: '100%'}}/>
                 </Link>
             </Grid>
 
@@ -163,7 +163,8 @@ const CoursePage = () => {
                       item md={9.5}>
                     <Grid container spacing='20px'>
                         <Grid item md={3.5}>
-                            <img className={styles.image} src={process.env.REACT_APP_API_URL + course.image}
+                            {console.log('course - ', course)}
+                            <img className={styles.image} src={course.image}
                                  style={{width: '100%'}} alt=""/>
                         </Grid>
                         <Grid justifyContent='space-between'
