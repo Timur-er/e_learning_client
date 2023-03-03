@@ -57,8 +57,8 @@ const CreateCourse = () => {
 
                     const course = await createCourse(formData)
                     dispatch(openSnackbarAction(course.data, 'success'))
-                    // setSubmitting(false);
-                    // resetForm();
+                    setSubmitting(false);
+                    resetForm();
                 }}
             >
                 {(formik) => (
