@@ -8,11 +8,11 @@ import QuestionsForm from "./QuestionsForm/QuestionsForm";
 import {Grid, Paper} from "@mui/material";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import styles from "../CreateCourseForm/CreateCourseForm.module.scss";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import {createCourse} from "../../http/courseAPI";
 import {useDispatch} from "react-redux";
 import {openSnackbarAction} from "../../store/Snackbar/actions";
+import styles from './CreateCourse.module.scss';
 
 const CreateCourse = () => {
     const [image, setImage] = useState([])
