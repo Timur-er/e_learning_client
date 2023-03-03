@@ -13,7 +13,7 @@ import * as Styled from './CourseCard_style.js';
 
 const CourseCard = ({course_id, title, description, rating, enrollments, price, image, is_paid, short, finished}) => {
     const [favourite, setFavourite] = useState(false);
-    const imageLink = process.env.REACT_APP_API_URL + image;
+    // const imageLink = process.env.REACT_APP_API_URL + image;
 
     const handleFavourites = (e) => {
         setFavourite(prevState => !prevState);
@@ -22,8 +22,8 @@ const CourseCard = ({course_id, title, description, rating, enrollments, price, 
     return (
         <Styled.CourseCard>
             <Styled.Media
-                image={imageLink}
-                title="green iguana"
+                image={image}
+                title={title}
             />
             <Box className={styles.course}>
                 <CardContent style={{paddingBottom: 0}}>
