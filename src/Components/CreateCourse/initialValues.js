@@ -4,13 +4,16 @@ const initialValues = {
         short_description: '',
         lector: '',
         lector_description: '',
+        lector_link: '',
         video_link: '',
         price: '',
+        previous_price: '',
         course_duration: '',
         course_level: '',
         course_area: '',
         attempts: '',
-        percentage: ''
+        percentage: '',
+        course_labels: []
     },
     course_description: [
         {

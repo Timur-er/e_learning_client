@@ -13,6 +13,8 @@ const validationSchema = yup.object({
     lector_description: yup
         .string()
         .required('Lector description is required!'),
+    lector_link: yup
+        .string(),
     price: yup
         .string()
         .required('Price is required!'),

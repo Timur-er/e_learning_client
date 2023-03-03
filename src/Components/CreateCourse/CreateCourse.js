@@ -5,7 +5,7 @@ import {Form, Formik} from "formik";
 import DescriptionForm from "./DescriptionForm/DescriptionForm";
 import InfoForm from "./InfoForm/InfoForm";
 import QuestionsForm from "./QuestionsForm/QuestionsForm";
-import {Grid} from "@mui/material";
+import {Grid, Paper} from "@mui/material";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import styles from "../CreateCourseForm/CreateCourseForm.module.scss";
@@ -13,7 +13,6 @@ import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import {createCourse} from "../../http/courseAPI";
 import {useDispatch} from "react-redux";
 import {openSnackbarAction} from "../../store/Snackbar/actions";
-import Box from "@mui/material/Box";
 
 const CreateCourse = () => {
     const [image, setImage] = useState([])
@@ -49,6 +48,8 @@ const CreateCourse = () => {
                     formData.append('image', image);
                     formData.append('certificate', certificate);
 
+                    console.log(values);
+
                     setImage([]);
                     setImageUrl(null)
                     setCertificate([]);
@@ -56,8 +57,8 @@ const CreateCourse = () => {
 
                     const course = await createCourse(formData)
                     dispatch(openSnackbarAction(course.data, 'success'))
-                    setSubmitting(false);
-                    resetForm();
+                    // setSubmitting(false);
+                    // resetForm();
                 }}
             >
                 {(formik) => (
@@ -69,42 +70,42 @@ const CreateCourse = () => {
                                     Add main info for course
                                 </Typography>
 
-                                <InfoForm />
+                                <Paper style={{padding: '20px'}}>
+                                    <InfoForm />
 
 
-                                <Grid display='flex' gap='20px'>
-                                    <Grid container flexDirection='column' className={styles.content__imageWrapper}>
-                                        <Grid>
-                                            {imageUrl && <img className={styles.content__image} src={imageUrl} alt="Uploaded Image"/>}
+                                    <Grid display='flex' gap='20px' marginTop='20px'>
+                                        <Grid container flexDirection='column' className={styles.content__imageWrapper}>
+                                            <Grid>
+                                                {imageUrl && <img className={styles.content__image} src={imageUrl} alt="Uploaded Image"/>}
+                                            </Grid>
+
+                                            <Grid>
+                                                <label className={styles.label}>
+                                                    <AddAPhotoIcon sx={{fontSize: 50}}/>
+                                                    <input className={styles.content__download} onChange={(e) => selectFile(e)}
+                                                           type="file"/>
+                                                    {imageUrl ? 'Change course image' : 'Add course image'}
+                                                </label>
+                                            </Grid>
                                         </Grid>
 
-                                        <Grid>
-                                            <label className={styles.label}>
-                                                <AddAPhotoIcon sx={{fontSize: 50}}/>
-                                                <input className={styles.content__download} onChange={(e) => selectFile(e)}
-                                                       type="file"/>
-                                                {imageUrl ? 'Change course image' : 'Add course image'}
-                                            </label>
+                                        <Grid container flexDirection='column' className={styles.content__imageWrapper}>
+                                            <Grid>
+                                                {certificateUrl && <img className={styles.content__image} src={certificateUrl} alt="Uploaded Image"/>}
+                                            </Grid>
+
+                                            <Grid>
+                                                <label className={styles.label}>
+                                                    <AddAPhotoIcon sx={{fontSize: 50}}/>
+                                                    <input className={styles.content__download} onChange={(e) => selectCertificate(e)}
+                                                           type="file"/>
+                                                    {certificateUrl ? 'Change certificate' : 'Add certificate'}
+                                                </label>
+                                            </Grid>
                                         </Grid>
                                     </Grid>
-
-                                    <Grid container flexDirection='column' className={styles.content__imageWrapper}>
-                                        <Grid>
-                                            {certificateUrl && <img className={styles.content__image} src={certificateUrl} alt="Uploaded Image"/>}
-                                        </Grid>
-
-                                        <Grid>
-                                            <label className={styles.label}>
-                                                <AddAPhotoIcon sx={{fontSize: 50}}/>
-                                                <input className={styles.content__download} onChange={(e) => selectCertificate(e)}
-                                                       type="file"/>
-                                                {certificateUrl ? 'Change certificate' : 'Add certificate'}
-                                            </label>
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
-
-
+                                </Paper>
 
                             </Grid>
                             <Grid item md={8} display='flex' flexDirection='column' gap='20px'>

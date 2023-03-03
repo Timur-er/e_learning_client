@@ -21,12 +21,15 @@ export const courseFormModel = [
     },
     {
         type: 'string',
+        name: 'course_info.lector_link',
+        placeholder: 'Lectors link',
+    },
+    {
+        type: 'string',
         name: 'course_info.video_link',
         placeholder: 'Video link',
     },
-]
 
-export const courseSmallFormModel1 = [
     {
         type: 'string',
         name: 'course_info.course_level',
@@ -42,9 +45,7 @@ export const courseSmallFormModel1 = [
         name: 'course_info.course_duration',
         placeholder: 'Course duration',
     },
-]
 
-export const courseSmallFormModel2 = [
     {
         type: 'string',
         name: 'course_info.attempts',
@@ -60,6 +61,9 @@ export const courseSmallFormModel2 = [
         name: 'course_info.price',
         placeholder: 'Price for course'
     },
+    {
+        type: 'string',
+        name: 'course_info.previous_price',
+        placeholder: 'Previous price for course ( if on sale )'
+    },
 ]
-
-export default {courseFormModel, courseSmallFormModel1, courseSmallFormModel2};

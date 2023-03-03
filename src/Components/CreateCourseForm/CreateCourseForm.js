@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Form, Formik} from "formik";
 import CustomTextField from "../CustomTextField/CustomTextField";
-import {courseFormModel, courseSmallFormModel1, courseSmallFormModel2} from "./CourseFormModel";
+import {courseFormModel, courseSmallFormModel1, courseSmallFormModel2} from "../CreateCourse/InfoForm/CourseFormModel";
 import styles from './CreateCourseForm.module.scss';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import validationSchema from "./courseFormValidationSchema";
