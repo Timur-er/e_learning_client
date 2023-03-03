@@ -1,35 +1,41 @@
-import React from 'react';
-import {courseFormModel, courseSmallFormModel1, courseSmallFormModel2} from "../../CreateCourseForm/CourseFormModel";
+import React, {useEffect, useState} from 'react';
+import {courseFormModel} from "./CourseFormModel";
 import CustomTextField from "../../CustomTextField/CustomTextField";
 import {Grid} from "@mui/material";
+import CustomSelect from "../../CustomSelect/CustomSelect";
+import {getAllLabels} from "../../../http/courseAPI";
+
 
 const InfoForm = () => {
+    const [labels, setLabels] = useState([]);
+
+    const getLabels = async () => {
+        const fetchedLabels = await getAllLabels();
+        setLabels(fetchedLabels.data)
+    }
+
+    useEffect(() => {
+        getLabels()
+    }, [])
 
     const renderInputs = courseFormModel.map((inputOptions, index) => {
-        return <CustomTextField key={index} id={index.toString()} {...inputOptions} />
-    })
-
-    const renderSmallInputs1 = courseSmallFormModel1.map((inputOptions, index) => {
-        return <CustomTextField key={index} id={index.toString()} {...inputOptions} />
-
-    })
-
-    const renderSmallInputs2 = courseSmallFormModel2.map((inputOptions, index) => {
-        return <CustomTextField key={index} id={index.toString()} {...inputOptions} />
+        return (
+            <Grid item md={6} key={index}>
+                <CustomTextField key={index} id={index.toString()} {...inputOptions} />
+            </Grid>
+        )
     })
 
     return (
         <>
             <Grid display='flex' flexDirection='column' gap='20px'>
-                <Grid display='flex' flexDirection='column' gap='20px'>
+                <Grid container spacing='20px'>
                     {renderInputs}
-                </Grid>
-                <Grid display='flex' gap='20px' flexDirection='column'>
-                    <Grid display='flex' gap='20px'>
-                        {renderSmallInputs1}
-                    </Grid>
-                    <Grid display='flex' gap='20px'>
-                        {renderSmallInputs2}
+
+                    <Grid item md={6}>
+                        <CustomSelect labels={labels} options={{
+                            name: "course_info.course_labels", placeholder: "Course labels", type: "select"}}
+                        />
                     </Grid>
                 </Grid>
             </Grid>

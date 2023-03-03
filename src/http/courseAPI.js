@@ -61,3 +61,8 @@ export const getFinishedCourses = async(user_id) => {
     const response = await $authHost.get(`/api/courses/getFinishedCourses/${user_id}`);
     return response;
 }
+
+export const getAllLabels = async() => {
+    const response = await $authHost.get('/api/courses/getAllCourseLabels');
+    return response;
+}

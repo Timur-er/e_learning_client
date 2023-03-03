@@ -67,6 +67,9 @@ const CoursePage = () => {
 
             const details = await getCourseDescriptionByID(course_id);
             const courseInfo = await getCourseByID(course_id, user_id);
+
+            console.log(courseInfo);
+
             setCourseDetails(details.data);
             setCourse(courseInfo.data.course)
             setLector(courseInfo.data.lector);
