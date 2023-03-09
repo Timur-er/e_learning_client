@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import HeaderMenu from "../Components/HeaderMenu/HeaderMenu";
 import Footer from "../Components/Footer/Footer";
 import RenderRoutes from "./RenderRoutes";

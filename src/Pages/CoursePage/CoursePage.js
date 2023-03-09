@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {Link, useParams} from "react-router-dom";
 import PageContainer from "../../Components/PageContainer/PageContainer";
 import {
@@ -22,6 +22,7 @@ import {getIsAuth, getUserId} from "../../store/User/selectors";
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import {AUTH_PAGE, COURSE_PAGE, COURSE_TEST_PAGE} from "../../routes/consts";
 import Box from "@mui/material/Box";
+import Labels from "../../Components/Labels/Labels";
 
 const CoursePage = () => {
     const {course_id} = useParams()
@@ -61,33 +62,33 @@ const CoursePage = () => {
         )
     })
 
-    const getData = async () => {
-        try {
-            setCourseLoading(true)
+    const getData = useCallback(async () => {
+            try {
+                setCourseLoading(true)
 
-            const details = await getCourseDescriptionByID(course_id);
-            const courseInfo = await getCourseByID(course_id, user_id);
+                const details = await getCourseDescriptionByID(course_id);
+                const courseInfo = await getCourseByID(course_id, user_id);
 
-            console.log(courseInfo);
+                setCourseDetails(details.data);
+                setCourse(courseInfo.data.course)
+                setLector(courseInfo.data.lector);
+                setIsPaid(courseInfo.data.is_paid)
 
-            setCourseDetails(details.data);
-            setCourse(courseInfo.data.course)
-            setLector(courseInfo.data.lector);
-            setIsPaid(courseInfo.data.is_paid)
-
-
-        } catch (e) {
-            // open snack bar later for each error!!!
-            console.log(e);
-        } finally {
-            setCourseLoading(false)
+            } catch (e) {
+                // open snack bar later for each error!!!
+                console.log(e);
+            } finally {
+                setCourseLoading(false)
+            }
         }
-    }
+        , [user_id, course_id]
+    )
+
 
     useEffect(() => {
         getData()
-        getCourses()
-    }, [course_id, user_id])
+        // getCourses()
+    }, [getData])
 
     if (courseLoading) {
         return (<PageContainer>
@@ -163,7 +164,6 @@ const CoursePage = () => {
                       item md={9.5}>
                     <Grid container spacing='20px'>
                         <Grid item md={3.5}>
-                            {console.log('course - ', course)}
                             <img className={styles.image} src={course.image}
                                  style={{width: '100%'}} alt=""/>
                         </Grid>
@@ -180,9 +180,14 @@ const CoursePage = () => {
                                     {course.short_description}
                                 </Typography>
                                 <Box display='inline'>
-                                    <Typography fontWeight='bold' display='inline'>
+
+                                    <a
+                                        href={`${lector.lector_link}`}
+                                        target="_blank"
+                                        className={styles.link}
+                                    >
                                         {lector.lector_name}
-                                    </Typography>
+                                    </a>
                                     - {lector.short_description}
                                 </Box>
 
@@ -203,19 +208,19 @@ const CoursePage = () => {
                                     >
                                         <Grid item md={4}>
                                             <Typography textAlign='center' fontWeight='bold'>
-                                                Course duration: <br/> 1 hour
+                                                Course duration: <br/> {course.course_duration}
                                             </Typography>
                                         </Grid>
 
                                         <Grid item md={4}>
                                             <Typography textAlign='center' fontWeight='bold'>
-                                                Attempts: <br/> 3
+                                                Attempts: <br/> {course.attempts}
                                             </Typography>
                                         </Grid>
 
                                         <Grid item md={4}>
                                             <Typography textAlign='center' fontWeight='bold'>
-                                                Course questions: <br/> 10
+                                                Course questions: <br/> {course.questions}
                                             </Typography>
                                         </Grid>
                                     </Grid>
@@ -224,28 +229,34 @@ const CoursePage = () => {
 
                                         <Grid item md={4}>
                                             <Typography textAlign='center' fontWeight='bold'>
-                                                Course price: <br/> 300
+                                                Course price: <br/> {course.previous_price && <s style={{color: 'grey'}}>{course.previous_price}$</s>} {course.price}$
                                             </Typography>
                                         </Grid>
 
                                         <Grid item md={4}>
                                             <Typography textAlign='center' fontWeight='bold'>
-                                                Certificate after: <br/> 80%
+                                                Certificate after: <br/> {course.percentage}%
                                             </Typography>
                                         </Grid>
 
                                         <Grid item md={4}>
                                             <Typography textAlign='center' fontWeight='bold'>
-                                                Course level: <br/> MEDIUM
+                                                Course level: <br/> {course.course_level_id}
                                             </Typography>
                                         </Grid>
                                     </Grid>
                                 </Grid>
                             </Grid>
 
-                            <Grid item display='flex' alignItems='center'>
-                                Course rating: <Rating value={4} disabled/>
+                            <Grid container justifyContent='space-between'>
+                                <Grid display='flex' alignItems='center'  >
+                                    Course rating: <Rating value={4} disabled/>
+                                </Grid>
+
+                                <Labels labels={course.labels}/>
+
                             </Grid>
+
 
                             <Grid item display='flex' justifyContent='space-between'>
                                 {isPaid

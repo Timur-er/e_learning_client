@@ -1,6 +1,6 @@
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import { CardActions, CardContent, Rating } from "@mui/material";
+import {CardActions, CardContent, Grid, Rating} from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
@@ -10,8 +10,10 @@ import { Link } from "react-router-dom";
 import { COURSE_PAGE } from "../../routes/consts";
 import styles from './CourseCard.module.scss';
 import * as Styled from './CourseCard_style.js';
+import {Label} from "@mui/icons-material";
+import Labels from "../Labels/Labels";
 
-const CourseCard = ({course_id, title, description, rating, enrollments, price, image, is_paid, short, finished}) => {
+const CourseCard = ({course_id, title, description, rating, enrollments, price, image, is_paid, short, finished, labels, previous_price}) => {
     const [favourite, setFavourite] = useState(false);
     // const imageLink = process.env.REACT_APP_API_URL + image;
 
@@ -35,9 +37,15 @@ const CourseCard = ({course_id, title, description, rating, enrollments, price, 
                     </Typography>
                     }
 
-                    <Typography variant="body2" style={{marginTop: 16}}>
-                        Price: {price}$
-                    </Typography>
+                    <Grid container alignItems='center' justifyContent='space-between'>
+                        <Typography variant="body2" style={{marginTop: 16}}>
+
+                            Price: {previous_price && <s style={{color: 'grey'}}>{previous_price}$</s>} {price}$
+                        </Typography>
+
+                        <Labels labels={labels}/>
+                    </Grid>
+
                 </CardContent>
                 <CardActions style={{display: 'flex', justifyContent: 'space-between'}}>
                     {finished ? (
@@ -45,6 +53,7 @@ const CourseCard = ({course_id, title, description, rating, enrollments, price, 
                             Download certificate
                         </Button>
                     ) : <Button
+                        variant='outlined'
                         component={Link}
                         to={`${COURSE_PAGE}/${course_id}`}
                         size="small">
