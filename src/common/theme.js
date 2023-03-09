@@ -1,4 +1,4 @@
-import { createTheme, alpha } from '@mui/material';
+import {createTheme, alpha} from '@mui/material';
 
 const defaultTheme = createTheme({
     palette: {
@@ -22,6 +22,21 @@ const defaultTheme = createTheme({
         }
     },
     components: {
+        MuiChip: {
+            styleOverrides: {
+                outlined: {
+                    fontWeight: 'bold'
+                },
+                colorPrimary: {
+                    borderColor: '#ff4d00',
+                    color: '#ff4d00',
+                },
+                colorSecondary: {
+                    borderColor: '#268d00',
+                    color: '#268d00',
+                },
+            },
+        },
         MuiButton: {
             styleOverrides: {
                 contained: {
@@ -51,14 +66,14 @@ const defaultTheme = createTheme({
             },
         },
         MuiSelect: {
-          styleOverrides: {
-              root: ({
-                  '& .MuiOutlinedInput-notchedOutline': {
-                      borderColor: "#bc9049"
-                  },
-                  outlineColor: "#bc9049",
-              })
-          }
+            styleOverrides: {
+                root: ({
+                    '& .MuiOutlinedInput-notchedOutline': {
+                        borderColor: "#bc9049"
+                    },
+                    outlineColor: "#bc9049",
+                })
+            }
         },
         MuiRating: {
             styleOverrides: {

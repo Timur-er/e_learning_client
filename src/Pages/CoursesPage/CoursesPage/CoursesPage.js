@@ -1,7 +1,7 @@
 import { FormControl, Grid, InputLabel, Select, Skeleton, TextField } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
-import React, { useEffect, useState } from 'react';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import { useSelector } from "react-redux";
 import CourseCard from "../../../Components/CourseCard/CourseCard";
 import PageContainer from "../../../Components/PageContainer/PageContainer";
@@ -12,34 +12,53 @@ import * as Styled from "./CoursesPage_style";
 const CoursesPage = () => {
     const [courses, setCourses] = useState([]);
     const user_id = useSelector(getUserId);
-    const [filteredCourses, setFilteredCourses] = useState([])
+    // const [filteredCourses, setFilteredCourses] = useState([])
     const [filter, setFilter] = useState('');
     const [loading, setLoading] = useState(true);
     const [sort, setSort] = useState('');
 
-    const getCourses = async () => {
+    const getCourses = useCallback(async () => {
         setLoading(true)
         let courses = await getAllCourses(user_id).finally(() => setLoading(false))
-        setFilteredCourses(courses.data)
+        console.log('courses - ', courses);
         setCourses(courses.data)
-    }
-
-
-    useEffect(() => {
-        getCourses();
     }, [user_id])
 
     useEffect(() => {
-        const filterCourses = courses.filter(course => {
+        getCourses();
+    }, [getCourses])
+
+    const filteredCourses = useMemo(() => {
+        return courses.filter(course => {
             const {course_name} = course;
             return course_name.toLowerCase().includes(filter.toLowerCase());
         })
+    }, [courses, filter])
 
-        setFilteredCourses(filterCourses)
-    }, [filter, courses])
+    // const getCourses = useCallback(async () => {
+    //     setLoading(true)
+    //     let courses = await getAllCourses(user_id).finally(() => setLoading(false))
+    //     console.log('courses - ', courses);
+    //     setFilteredCourses(courses.data)
+    //     setCourses(courses.data)
+    // }, [user_id])
+    //
+    //
+    // useEffect(() => {
+    //     getCourses();
+    // }, [getCourses])
+    //
+    // useEffect(() => {
+    //     const filterCourses = courses.filter(course => {
+    //         const {course_name} = course;
+    //         return course_name.toLowerCase().includes(filter.toLowerCase());
+    //     })
+    //
+    //     setFilteredCourses(filterCourses)
+    // }, [filter, courses])
 
     const renderCards = filteredCourses.map((course, index) => {
-        const {id, course_name, short_description, price, enrollments, rating, image, is_paid} = course;
+        const {id, course_name, short_description, price, enrollments, rating, image, is_paid, labels, previous_price} = course;
 
         return (
             <Grid item key={index}>
@@ -53,6 +72,8 @@ const CoursesPage = () => {
                     price={price}
                     image={image}
                     is_paid={is_paid}
+                    labels={labels}
+                    previous_price={previous_price}
                 />
             </Grid>
         )

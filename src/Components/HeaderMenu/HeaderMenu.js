@@ -111,8 +111,8 @@ function ResponsiveAppBar({ routes }) {
             <Slide
               direction="right"
               in={isMenuOpen}
-              enter="ease"
-              exit="ease"
+              enter={true}
+              exit={true}
               mountOnEnter>
               <Styled.Menu
                 id="menu-appbar"
